@@ -1,0 +1,168 @@
+==================================================
+ AutoDiffX - Symbolic Differentiation Mini-Compiler
+==================================================
+Enter one expression in x per line:
+--------------------------------------------------
+Tokens     : ID(x) POW NUMBER(3) PLUS NUMBER(2) MUL ID(x) POW NUMBER(2) PLUS NUMBER(5) MUL ID(x) 
+AST        :
+    +
+        +
+            ^
+                VAR x
+                NUM 3
+            *
+                NUM 2
+                ^
+                    VAR x
+                    NUM 2
+        *
+            NUM 5
+            VAR x
+Semantic   : OK
+Expression : x^3 + 2*x^2 + 5*x
+Simplified : x^3 + 2*x^2 + 5*x
+Derivative : 3*x^(3 - 1)*1 + 0*x^2 + 2*2*x^(2 - 1)*1 + 0*x + 5*1
+Optimized  : 3*x^2 + 4*x + 5
+--------------------------------------------------
+Tokens     : NUMBER(7) 
+AST        :
+    NUM 7
+Semantic   : OK
+Expression : 7
+Simplified : 7
+Derivative : 0
+Optimized  : 0
+--------------------------------------------------
+Tokens     : NUMBER(4) MUL ID(x) MINUS NUMBER(9) 
+AST        :
+    -
+        *
+            NUM 4
+            VAR x
+        NUM 9
+Semantic   : OK
+Expression : 4*x - 9
+Simplified : 4*x - 9
+Derivative : 0*x + 4*1 - 0
+Optimized  : 4
+--------------------------------------------------
+Tokens     : MINUS ID(x) POW NUMBER(2) MINUS NUMBER(3) MUL ID(x) PLUS NUMBER(10) 
+AST        :
+    +
+        -
+            NEG (unary -)
+                ^
+                    VAR x
+                    NUM 2
+            *
+                NUM 3
+                VAR x
+        NUM 10
+Semantic   : OK
+Expression : -x^2 - 3*x + 10
+Simplified : -x^2 - 3*x + 10
+Derivative : -(2*x^(2 - 1)*1) - (0*x + 3*1) + 0
+Optimized  : -2*x - 3
+--------------------------------------------------
+Tokens     : ID(x) POW NUMBER(2) MUL LPAREN ID(x) PLUS NUMBER(1) RPAREN 
+AST        :
+    *
+        ^
+            VAR x
+            NUM 2
+        +
+            VAR x
+            NUM 1
+Semantic   : OK
+Expression : x^2*(x + 1)
+Simplified : x^2*(x + 1)
+Derivative : 2*x^(2 - 1)*1*(x + 1) + x^2*(1 + 0)
+Optimized  : 2*x*(x + 1) + x^2
+--------------------------------------------------
+Tokens     : NUMBER(1) DIV ID(x) 
+AST        :
+    /
+        NUM 1
+        VAR x
+Semantic   : OK
+Expression : 1/x
+Simplified : 1/x
+Derivative : (0*x - 1*1)/x^2
+Optimized  : -1/x^2
+--------------------------------------------------
+Tokens     : LPAREN ID(x) PLUS NUMBER(1) RPAREN DIV LPAREN ID(x) MINUS NUMBER(1) RPAREN 
+AST        :
+    /
+        +
+            VAR x
+            NUM 1
+        -
+            VAR x
+            NUM 1
+Semantic   : OK
+Expression : (x + 1)/(x - 1)
+Simplified : (x + 1)/(x - 1)
+Derivative : ((1 + 0)*(x - 1) - (x + 1)*(1 - 0))/(x - 1)^2
+Optimized  : (x - 1 - (x + 1))/(x - 1)^2
+--------------------------------------------------
+Tokens     : LPAREN NUMBER(2) MUL ID(x) PLUS NUMBER(1) RPAREN POW NUMBER(3) 
+AST        :
+    ^
+        +
+            *
+                NUM 2
+                VAR x
+            NUM 1
+        NUM 3
+Semantic   : OK
+Expression : (2*x + 1)^3
+Simplified : (2*x + 1)^3
+Derivative : 3*(2*x + 1)^(3 - 1)*(0*x + 2*1 + 0)
+Optimized  : 6*(2*x + 1)^2
+--------------------------------------------------
+Tokens     : ID(x) POW MINUS NUMBER(2) 
+AST        :
+    ^
+        VAR x
+        NEG (unary -)
+            NUM 2
+Semantic   : OK
+Expression : x^(-2)
+Simplified : x^(-2)
+Derivative : -2*x^(-2 - 1)*1
+Optimized  : -2*x^(-3)
+--------------------------------------------------
+Tokens     : ID(x) POW NUMBER(0.5) 
+AST        :
+    ^
+        VAR x
+        NUM 0.5
+Semantic   : OK
+Expression : x^0.5
+Simplified : x^0.5
+Derivative : 0.5*x^(0.5 - 1)*1
+Optimized  : 0.5*x^(-0.5)
+--------------------------------------------------
+Tokens     : ID(x) MUL NUMBER(1) PLUS NUMBER(0) MUL ID(x) PLUS LPAREN NUMBER(2) PLUS NUMBER(3) RPAREN MUL ID(x) POW NUMBER(1) 
+AST        :
+    +
+        +
+            *
+                VAR x
+                NUM 1
+            *
+                NUM 0
+                VAR x
+        *
+            +
+                NUM 2
+                NUM 3
+            ^
+                VAR x
+                NUM 1
+Semantic   : OK
+Expression : x*1 + 0*x + (2 + 3)*x^1
+Simplified : x + 5*x
+Derivative : 1*1 + x*0 + 0*x + 0*1 + (0 + 0)*x^1 + (2 + 3)*1*x^(1 - 1)*1
+Optimized  : 6
+--------------------------------------------------

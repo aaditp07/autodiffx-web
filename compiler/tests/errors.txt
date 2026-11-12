@@ -1,0 +1,15 @@
+# AutoDiffX - error test cases (every line should be rejected)
+
+# Lexical errors
+x @ 2
+x + $
+
+# Syntax errors
+x^3 + * 2
+(x + 1
+2x + 1
+
+# Semantic errors
+y^2 + x
+x^x
+x / 0

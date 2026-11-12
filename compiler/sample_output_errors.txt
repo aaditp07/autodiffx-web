@@ -1,0 +1,51 @@
+==================================================
+ AutoDiffX - Symbolic Differentiation Mini-Compiler
+==================================================
+Enter one expression in x per line:
+--------------------------------------------------
+Lexical error: unexpected character '@'
+Tokens     : ID(x) NUMBER(2) 
+Compilation stopped (lexical error).
+--------------------------------------------------
+Lexical error: unexpected character '$'
+Tokens     : ID(x) PLUS 
+Compilation stopped (lexical error).
+--------------------------------------------------
+Syntax error: syntax error near '*'
+Tokens     : ID(x) POW NUMBER(3) PLUS MUL NUMBER(2) 
+Compilation stopped (syntax error).
+--------------------------------------------------
+Syntax error: syntax error at end of line
+Tokens     : LPAREN ID(x) PLUS NUMBER(1) 
+Compilation stopped (syntax error).
+--------------------------------------------------
+Syntax error: syntax error near 'x'
+Tokens     : NUMBER(2) ID(x) PLUS NUMBER(1) 
+Compilation stopped (syntax error).
+--------------------------------------------------
+Tokens     : ID(y) POW NUMBER(2) PLUS ID(x) 
+AST        :
+    +
+        ^
+            VAR y
+            NUM 2
+        VAR x
+Semantic error: unknown variable 'y' (only x is allowed)
+Compilation stopped (semantic error).
+--------------------------------------------------
+Tokens     : ID(x) POW ID(x) 
+AST        :
+    ^
+        VAR x
+        VAR x
+Semantic error: x in an exponent is not supported
+Compilation stopped (semantic error).
+--------------------------------------------------
+Tokens     : ID(x) DIV NUMBER(0) 
+AST        :
+    /
+        VAR x
+        NUM 0
+Semantic error: division by zero
+Compilation stopped (semantic error).
+--------------------------------------------------

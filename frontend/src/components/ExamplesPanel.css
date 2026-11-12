@@ -1,0 +1,47 @@
+.examples-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.4rem;
+}
+.examples-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.9rem;
+  color: var(--text);
+}
+.examples-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.example-btn {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: left;
+  transition: border-color 0.15s, background 0.15s;
+}
+.example-btn:hover {
+  border-color: var(--accent);
+  background: rgba(88, 166, 255, 0.05);
+}
+.example-label {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.example-expr {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
