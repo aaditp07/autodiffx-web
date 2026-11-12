@@ -1,0 +1,6 @@
+# Partial derivatives w.r.t. y  (run with: autodiffx -d y)
+x^2 + y^2
+x * y^3
+sin(y) + cos(x)
+exp(y) * x^2
+y^2 * (y + 1)

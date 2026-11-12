@@ -1,0 +1,13 @@
+# Trigonometric and transcendental functions
+sin(x)
+cos(x)
+tan(x)
+ln(x)
+exp(x)
+sin(x^2)
+cos(2*x + 1)
+exp(x^2)
+ln(x^2 + 1)
+sin(x) * cos(x)
+sin(x)^2 + cos(x)^2
+exp(x) / (1 + exp(x))

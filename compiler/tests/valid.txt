@@ -1,28 +1,10 @@
-# AutoDiffX - valid test cases (one expression per line)
-
-# 1. The assignment example (power + sum + constant multiple)
+# Polynomial expressions (all in x, default wrt=x)
 x^3 + 2*x^2 + 5*x
-
-# 2. Constant and linear terms
-7
-4*x - 9
-
-# 3. Difference rule and unary minus
 -x^2 - 3*x + 10
-
-# 4. Product rule
 x^2 * (x + 1)
-
-# 5. Quotient rule
 1 / x
-(x + 1) / (x - 1)
-
-# 6. Power rule with chain rule
 (2*x + 1)^3
-
-# 7. Negative and fractional exponents
 x^-2
-x^0.5
-
-# 8. Optimizer showcase on the input itself
-x*1 + 0*x + (2 + 3)*x^1
+5
+3*x + 3*x
+2*x^2 + 3*x^2 + x^2
